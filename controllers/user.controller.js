@@ -58,16 +58,5 @@ router.post('/login', async (req, res) => {
   }
 });
 
-router.patch('/update-role', authenticateToken, authorizeRole('admin'), (req, res) => {
-  const newRole = req.body.newRole;
-  updateUserRole(newRole, (err, user) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({ error: 'Failed to update user role' });
-    }
-    console.log(`User role updated to ${newRole}`);
-    res.json({ message: `User role updated to ${newRole}` });
-  });
-});
 
 export default router

@@ -1,6 +1,6 @@
 import express from "express";
 import authRouter from "./controllers/user.controller.js";
-// import authMiddleware from "./middlewares/auth.middleware.js";
+
 import {
   authenticateToken,
   authorizeRole,
@@ -30,19 +30,11 @@ connectDB()
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true }));
 
+// importing authRouter 
+
 app.use("/auth", authRouter);
 
-// app.get('/public', (req, res) => {
-//   res.send('Public route');
-// });
 
-// app.get('/user', authMiddleware([roles.USER, roles.ADMIN] ), (req, res) => {
-//   res.send('User route');
-// });
-
-// app.get('/admin', authMiddleware([roles.ADMIN]), (req, res) => {
-//   res.send('Admin route');
-// });
 
 app.get("/public", (req, res) => {
   res.json({ message: "Public route" });
@@ -67,16 +59,14 @@ app.get(
     res.json({ message: "Admin route" });
   }
 );
-// app.get("/user", (req,res) => {
-//   res.json({message : "User" , user : req.user})
-// })
+
 app.put(
   "/admin/update-role/:id",
   authenticateToken,
   logger,
   authorizeRole(roles.ADMIN), // Only admins can access this route
   async (req, res) => {
-    const { id } = req.params; // The user ID to be updated
+    const { id } = req.params; // The user ID to be updated  ---> have to be passed maunally
     const { newRole } = req.body; // The new role from the request body
 
     if (!Object.values(roles).includes(newRole)) {
