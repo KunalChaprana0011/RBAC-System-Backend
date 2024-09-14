@@ -1,50 +1,6 @@
 import jwt from "jsonwebtoken";
 import { roles, permissions } from "../roles.js";
-// const authMiddleware = (requiredRole) => {
-//   // return (req, res, next) => {
-//   //   const authHeader = req.header('Authorization');
-//   //   if (!authHeader) {
-//   //     return res.status(401).json({ message: 'Unauthorized mY' });
-//   //   }
 
-//   //   const token  = authHeader.split(' ')[1];
-//   //   try {
-//   //     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
-//   //     const userRole = decodedToken.role;
-
-//   //     if (!permissions[userRole].includes('*') && !permissions[userRole].includes(req.path)) {
-//   //       return res.status(403).json({ message: 'Forbidden' });
-//   //     }
-
-//   //     req.user = decodedToken;
-//   //     next();
-//   //   } catch (error) {
-//   //     return res.status(401).json({ message: 'Unauthorized' });
-//   //   }
-//   // };
-// //   return (req, res, next) => {
-// //     const token = req.header('Authorization');
-// //     if (!token) {
-// //         return res.status(401).json({ message: 'Unauthorized' });
-// //     }
-// //     try {
-// //         const decoded = jwt.verify(token,
-// // 'your-secret-key');
-// //         const userRole = decoded.role;
-// //         if (!allowedRoles.includes(userRole)) {
-// //             return res.status(403).json({ message: 'Forbidden' });
-// //         }
-// //         req.user = decoded;
-// //         next();
-// //     } catch (error) {
-// //         res.status(401).json({ message: 'Unauthorized' });
-// //     }
-// // };
-// };
-
-// export default authMiddleware
-
-// auth.middleware.js
 
 export function authenticateToken(req, res, next) {
   const token = req.header("Authorization");
